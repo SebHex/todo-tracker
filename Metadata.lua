@@ -9,3 +9,4 @@ Metadata.Notes = GetAddOnMetadata(addonName, "notes")
 Metadata.Author = GetAddOnMetadata(addonName, "author")
 Metadata.DBName = addonName:gsub("_", "") .. "DB"
 Metadata.Initials = Metadata.Title:gsub("([^%s])[^%s]*", "%1"):gsub("%s+", "")
+Metadata.IconPath = ("Interface\\Addons\\%s\\Assets\\Icon"):format(addonName)
