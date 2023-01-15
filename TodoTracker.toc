@@ -11,3 +11,5 @@ Metadata.lua
 Libs.lua
 Utils.lua
 Init.lua
+
+Components/Tracker.lua
