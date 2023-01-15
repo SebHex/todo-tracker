@@ -105,7 +105,7 @@ local configDialogStatusText = format("|cff808080Version: %s • Author: %s|r", 
 ]]
 function Utils:OpenConfigDialog()
   AceConfigDialog:Open(addonName)
-  DoEmote("READ")
+  DoEmote("READ", nil, true)
   Utils:PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN)
   
   local dialog = AceConfigDialog.OpenFrames[addonName]
