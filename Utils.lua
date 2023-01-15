@@ -105,7 +105,23 @@ local configDialogStatusText = format("|cff808080Version: %s • Author: %s|r", 
 ]]
 function Utils:OpenConfigDialog()
   AceConfigDialog:Open(addonName)
-  AceConfigDialog.OpenFrames[addonName]:SetStatusText(configDialogStatusText)
+  DoEmote("READ")
+  Utils:PlaySound(SOUNDKIT.IG_QUEST_LOG_OPEN)
+  
+  local dialog = AceConfigDialog.OpenFrames[addonName]
+  local dialogFrame = dialog and dialog.frame
+
+  dialog:SetStatusText(configDialogStatusText)
+
+  if (dialogFrame.hooked) then
+    return
+  end
+
+  dialogFrame.hooked = true
+  dialogFrame:HookScript("OnHide", function()
+    CancelEmote()
+    Utils:PlaySound(SOUNDKIT.IG_QUEST_LOG_CLOSE)
+  end)
 end
 
 --[[
