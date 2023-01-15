@@ -7,6 +7,10 @@ local defaultDBOptions = {
   profile = {
     minimap = {
       hide = false
+    },
+    sound = {
+      enabled = true,
+      channel = "SFX"
     }
   }
 }
@@ -27,44 +31,75 @@ local minimapIconOptions = {
 local configDialogOptions = {
   name = Metadata.Title,
   type = "group",
+  childGroups = "tab",
   args = {
-    title = {
+    todoTab = {
       order = 1,
-      type = "description",
-      fontSize = "large",
-      image = Metadata.IconPath,
-      imageWidth = 24,
-      imageHeight = 24,
-      name = Metadata.Title
-    },
-    description = {
-      order = 2,
-      type = "description",
-      fontSize = "medium",
-      name = "A starting point for your next WoW addon."
-    },
-    divider = {
-      order = 3,
-      type = "header",
-      name = ""
-    },
-    generalOptions = {
-      order = 4,
       type = "group",
-      name = "General",
+      name = "Todo",
+      args = {}
+    },
+    optionsTab = {
+      order = 2,
+      type = "group",
+      name = "Options",
       args = {
-        minimapIcon = {
+        generalOptions = {
           order = 1,
-          name = "Minimap icon",
-          desc = "Show the minimap icon",
-          type = "toggle",
-          get = function(info)
-            return not addonTable.db.profile.minimap.hide
-          end,
-          set = function(info, value)
-            addonTable.db.profile.minimap.hide = not value
-            Utils:SetMinimapIconShown(value)
-          end
+          type = "group",
+          name = "General",
+          args = {
+            minimapIconToggle = {
+              name = "Minimap icon",
+              desc = "Show the minimap icon",
+              type = "toggle",
+              get = function(info)
+                return not addonTable.db.profile.minimap.hide
+              end,
+              set = function(info, value)
+                addonTable.db.profile.minimap.hide = not value
+                Utils:SetMinimapIconShown(value)
+              end
+            }
+          }
+        },
+        soundOptions = {
+          order = 2,
+          type = "group",
+          name = "Sound",
+          args = {
+            soundToggle = {
+              order = 1,
+              name = "Enable sound",
+              desc = "Play a sound when an item is created, updated or abandoned",
+              type = "toggle",
+              get = function(info)
+                return addonTable.db.profile.sound.enabled
+              end,
+              set = function(info, value)
+                addonTable.db.profile.sound.enabled = value
+              end
+            },
+            soundChannelDropdown = {
+              order = 2,
+              name = "Sound channel",
+              desc = "Select the sound channel to play the sound on. Defaults to \"Effects\"",
+              type = "select",
+              values = {
+                ["Master"] = "Master",
+                ["SFX"] = "Effects",
+                ["Music"] = "Music",
+                ["Ambience"] = "Ambience",
+                ["Dialog"] = "Dialog"
+              },
+              get = function(info)
+                return addonTable.db.profile.sound.channel
+              end,
+              set = function(info, value)
+                addonTable.db.profile.sound.channel = value
+              end
+            }
+          }
         }
       }
     }
