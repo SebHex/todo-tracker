@@ -131,12 +131,12 @@ end
 --[[
   Play a sound by id if sound is enabled.
 ]]
-function Utils:PlaySound(soundId, channel)
+function Utils:PlaySound(id, channel)
   local soundOptions = addonTable.db.profile.sound
   if (not soundOptions.enabled) then
     return
   end
 
   channel = channel or soundOptions.channel
-  PlaySound(soundId, channel)
+  PlaySound(id, channel)
 end
