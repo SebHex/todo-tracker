@@ -36,7 +36,8 @@ function TrackerModule:Update()
     for i, item in ipairs(segment.items) do
       local dashStyle = item.completed and OBJECTIVE_DASH_STYLE_HIDE or OBJECTIVE_DASH_STYLE_SHOW
       local colorStyle = OBJECTIVE_TRACKER_COLOR[item.completed and "Complete" or "Normal"]
-      self:AddObjective(block, i, item.text, lineTypeAnim, nil, dashStyle, colorStyle)
+      local line = self:AddObjective(block, i, item.text, lineTypeAnim, nil, dashStyle, colorStyle)
+      line.Check:SetShown(item.completed)
     end
 
     block:SetHeight(block.height)
