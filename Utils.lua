@@ -160,3 +160,9 @@ function Utils:PlaySound(id, channel)
   channel = channel or soundOptions.channel
   PlaySound(id, channel)
 end
+--[[
+  Update the objective tracker.
+]]
+function Utils:UpdateObjectiveTracker()
+  ObjectiveTracker_Update()
+end
