@@ -5,6 +5,7 @@ local Utils = addonTable.Utils
 -- Default options for AceDB database
 local defaultDBOptions = {
   profile = {
+    todoList = {},
     minimap = {
       hide = false
     },
