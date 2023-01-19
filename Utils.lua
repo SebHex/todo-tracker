@@ -160,6 +160,18 @@ function Utils:PlaySound(id, channel)
   channel = channel or soundOptions.channel
   PlaySound(id, channel)
 end
+
+local questAddedSoundId = 618
+
+--[[
+  Add a new todo item to the todo list.
+]]
+function Utils:AddTodoItem(todoItem)
+  tinsert(addonTable.db.profile.todoList, todoItem)
+  Utils:PlaySound(questAddedSoundId)
+  Utils:UpdateObjectiveTracker()
+end
+
 --[[
   Update the objective tracker.
 ]]
