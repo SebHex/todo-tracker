@@ -162,6 +162,7 @@ function Utils:PlaySound(id, channel)
 end
 
 local questAddedSoundId = 618
+local questAbandonedSoundId = SOUNDKIT.IG_QUEST_LOG_ABANDON_QUEST
 
 --[[
   Add a new todo item to the todo list.
@@ -169,6 +170,15 @@ local questAddedSoundId = 618
 function Utils:AddTodoItem(todoItem)
   tinsert(addonTable.db.profile.todoList, todoItem)
   Utils:PlaySound(questAddedSoundId)
+  Utils:UpdateObjectiveTracker()
+end
+
+--[[
+  Remove all todo items from the todo list.
+]]
+function Utils:RemoveAllTodoItems()
+  wipe(addonTable.db.profile.todoList)
+  Utils:PlaySound(questAbandonedSoundId)
   Utils:UpdateObjectiveTracker()
 end
 
