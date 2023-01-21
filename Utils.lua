@@ -161,15 +161,17 @@ function Utils:PlaySound(id, channel)
   PlaySound(id, channel)
 end
 
-local questAddedSoundId = 618
-local questAbandonedSoundId = SOUNDKIT.IG_QUEST_LOG_ABANDON_QUEST
+local soundIds = {
+  ["questAdded"] = 618,
+  ["questAbandoned"] = SOUNDKIT.IG_QUEST_LOG_ABANDON_QUEST,
+}
 
 --[[
   Add a new todo item to the todo list.
 ]]
 function Utils:AddTodoItem(todoItem)
   tinsert(addonTable.db.profile.todoList, todoItem)
-  Utils:PlaySound(questAddedSoundId)
+  Utils:PlaySound(soundIds.questAdded)
   Utils:UpdateObjectiveTracker()
 end
 
@@ -178,7 +180,7 @@ end
 ]]
 function Utils:RemoveAllTodoItems()
   wipe(addonTable.db.profile.todoList)
-  Utils:PlaySound(questAbandonedSoundId)
+  Utils:PlaySound(soundIds.questAbandoned)
   Utils:UpdateObjectiveTracker()
 end
 
