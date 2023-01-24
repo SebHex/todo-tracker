@@ -227,3 +227,27 @@ end
 function Utils:UpdateObjectiveTracker()
   ObjectiveTracker_Update()
 end
+
+--[[
+  Create an item by name, link or id. The callback will be called with the item
+  as the first argument.
+]]
+function Utils:CreateItem(value, callback)
+  local id = GetItemInfoInstant(value) or tonumber(value)
+
+  if (not id) then
+    Utils:PrintWarning("Item not found. The item either doesn't exist or hasn't been cached yet. Try using an item link or id instead")
+    return
+  end
+
+  local item = Item:CreateFromItemID(id)
+
+  if (item:IsItemEmpty()) then
+    Utils:PrintWarning("An item with the id", id, "doesn't exist.")
+    return
+  end
+
+  item:ContinueOnItemLoad(function()
+    callback(item)
+  end)
+end
