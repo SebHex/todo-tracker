@@ -119,6 +119,7 @@ end
 
 function Addon:RefreshConfig(event)
   Utils:SetMinimapIconShown(not addonTable.db.profile.minimap.hide)
+  Utils:UpdateObjectiveTracker()
 end
 
 function Addon:SlashCommand(input)
