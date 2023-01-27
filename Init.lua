@@ -129,3 +129,7 @@ function Addon:SlashCommand(input)
     Utils:ToggleLogsDialog()
   end
 end
+
+local Modules = {}
+addonTable.Modules = Modules
+Modules.Tracker = Addon:NewModule("Tracker", "AceEvent-3.0")

@@ -13,3 +13,5 @@ Utils.lua
 Init.lua
 
 Components/Tracker.lua
+
+Modules/Tracker.lua
