@@ -243,7 +243,7 @@ function Utils:CreateItem(value, callback)
   local item = Item:CreateFromItemID(id)
 
   if (item:IsItemEmpty()) then
-    Utils:PrintWarning("An item with the id", id, "doesn't exist.")
+    Utils:PrintWarning("An item with the id", id, "doesn't exist")
     return
   end
 
