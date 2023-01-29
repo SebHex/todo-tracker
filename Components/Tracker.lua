@@ -34,9 +34,25 @@ function TrackerModule:Update()
     self:SetBlockHeader(block, segment.text)
 
     for i, item in ipairs(segment.items) do
+      local text = item.text
+
+      if (item.type == "item") then
+        local count = GetItemCount(item.id, true, false, true)
+        local requiredCount = item.requiredCount or 1
+        local completed = count >= requiredCount
+        local name = item.name
+
+        item.completed = completed
+        item.count = count
+        item.requiredCount = requiredCount
+
+        text = completed and name or count .. "/" .. requiredCount .. " " .. name
+      end
+
       local dashStyle = item.completed and OBJECTIVE_DASH_STYLE_HIDE or OBJECTIVE_DASH_STYLE_SHOW
       local colorStyle = OBJECTIVE_TRACKER_COLOR[item.completed and "Complete" or "Normal"]
-      local line = self:AddObjective(block, i, item.text, lineTypeAnim, nil, dashStyle, colorStyle)
+
+      local line = self:AddObjective(block, i, text, lineTypeAnim, nil, dashStyle, colorStyle)
       line.Check:SetShown(item.completed)
     end
 
