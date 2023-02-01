@@ -1,5 +1,4 @@
 local addonName, addonTable = ...
-local Metadata = addonTable.Metadata
 local Utils = addonTable.Utils
 local Tracker = addonTable.Modules.Tracker
 
